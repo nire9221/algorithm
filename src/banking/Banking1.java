@@ -5,18 +5,16 @@ import java.util.Random;
 
 public class Banking1 {
 	static int total = 0;
-	static int [] inMoney = new int[40]; // 입금액 기록 
-	static int inIdx; //지역변수로 두면 안되는 것들..	
-	static int [] outMoney = new int[40]; // 출금액 기록 
-	static int outIdx; //지역변수로 두면 안되는 것들..	
+	static int [] inMoney = new int[40]; // deposit record
+	static int inIdx; 
+	static int [] outMoney = new int[40]; // withdraw record 
+	static int outIdx;	
 
 	
-	//입금처리
 	static void deposit(int d) { // d ==> money
-		//입금액  ==> d 
-		//현잔액  + 입금액
+		//deposit  ==> d 
+		//current balance + deposit
 		total += d;
-		//총잔액 저장
 		inMoney[inIdx] = d;
 		++inIdx;
 //		System.out.println("deposit :" + d);
@@ -24,23 +22,22 @@ public class Banking1 {
 //		System.out.println("total :" + total);
 	}
 	
-	//출금처리
 	static void withdraw(int w) {
-		//출금액  ==> w
-		//현잔액  - 출금액 : 음수 가능성
+		//withdraw  ==> w
+		//current balance  - withdraw : possible to be negative
 		if(w <= total) {
-			//총잔액 저장
+			//update total balance 
 			total -= w;			
 			outMoney[outIdx] = w;
 			++outIdx;
 		} else {
-			System.out.println("잔액부족");
+			System.out.println("not enough");
 		}
 	}
 	
 	public static void main(String[] args) throws IOException {
 		Random ran = new Random();
-		int max = 10000; //난수 값 범위를 줄인다...
+		int max = 10000; 
 		int money;
 		
 		while(true) {
